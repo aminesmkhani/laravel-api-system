@@ -20,12 +20,6 @@ class ArticleController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
     public function store(Request $request)
     {
         //
@@ -34,7 +28,10 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        return response()->json([
+           'data' => $article
+        ], 200);
     }
 
 
