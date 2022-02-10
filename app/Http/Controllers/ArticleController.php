@@ -63,7 +63,11 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        //
+        Article::FindOrFail($id)->delete();
+
+        return response()->json([
+            'message'   => 'deleted'
+        ], 200);
     }
 
 
