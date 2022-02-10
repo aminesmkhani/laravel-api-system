@@ -13,7 +13,7 @@ class ArticleController extends Controller
     {
         $articles = Article::all();
         return response()->json([
-           'data'   => $articles,
+           'data'   => ArticleResource::collection($articles),
             'meta'  => [
                 'count' => $articles->count()
             ]
