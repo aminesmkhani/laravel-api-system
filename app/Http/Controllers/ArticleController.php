@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class ArticleController extends Controller
     {
         $article = Article::FindOrFail($id);
         return response()->json([
-           'data' => $article
+           'data' => new ArticleResource($article)
         ], 200);
     }
 
