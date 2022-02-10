@@ -51,15 +51,13 @@ class ArticleController extends Controller
     }
 
 
-    public function edit($id)
-    {
-        //
-    }
-
-
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        $article->update($request->all());
+        return response()->json([
+           'message'    => 'updated'
+        ],200);
     }
 
 
