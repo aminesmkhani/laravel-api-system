@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
@@ -12,12 +13,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
-        return response()->json([
-           'data'   => ArticleResource::collection($articles),
-            'meta'  => [
-                'count' => $articles->count()
-            ]
-        ],200);
+        return response()->json(new ArticleCollection($articles),200);
     }
 
 
