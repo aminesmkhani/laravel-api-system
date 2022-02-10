@@ -19,7 +19,26 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $this->validateArticle($request);
+
+        Article::create([
+           'user_id' =>1,
+           'title' => $request->title ,
+            'description'   => $request->description,
+            'image' => $this->uploadImage($request)
+        ]);
+
+        return response()->json([
+            'message' => 'created'
+        ], 201);
+    }
+
+    private function validateArticle($request)
+    {
+            $request->validate([
+                'title' => ['required'],
+                'image' => ['required']
+            ]);
     }
 
 
@@ -47,5 +66,11 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    private function uploadImage($request)
+    {
+        return $request->hasFile('image') ? $request->image->store('public') : null;
     }
 }
